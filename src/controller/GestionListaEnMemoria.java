@@ -21,11 +21,11 @@ public class GestionListaEnMemoria {
         //sartzen ditu taulan datuak 
         
         return FXCollections.observableArrayList(
-            new Person("Sara", "Garrido", "saragarrido33@gmail.com"),
-            new Person("Itziar", "Horrillo", "itziarhorrillo@gmail.com"),
-            new Person("Ariane", "Gayoso", "arianegayoso@gmail.com"),
-            new Person("Jone", "Izquierdo", "joneizquierdo@gmail.com"),
-            new Person("Mirene", "Moreno", "mirenemoreno@gmail.com")
+            new Person("Sara", "Garrido", "saragarrido33@gmail.com","atezaina"),
+            new Person("Itziar", "Horrillo", "itziarhorrillo@gmail.com","extremoa"),
+            new Person("Ariane", "Gayoso", "arianegayoso@gmail.com","pibotea"),
+            new Person("Jone", "Izquierdo", "joneizquierdo@gmail.com","laterala"),
+            new Person("Mirene", "Moreno", "mirenemoreno@gmail.com","extremoa")
         );
     }     
     

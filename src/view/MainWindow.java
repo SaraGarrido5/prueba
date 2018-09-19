@@ -44,31 +44,23 @@ public class MainWindow extends Application {
         ObservableList<Person> data = GestionListaEnMemoria.cargarDatos();
         
         stage.setTitle("Datuen Taula");
-        stage.setWidth(450);
+        stage.setWidth(1000);
         stage.setHeight(550);
         final Label label = new Label("Jokalariak");
         label.setFont(new Font("Arial", 20));
         
         table.setEditable(true);
         
-        TableColumn<Person, String> firstNameCol =
-            new TableColumn<>("Izena");
+        TableColumn<Person, String> firstNameCol = new TableColumn<>("Izena");
         firstNameCol.setMinWidth(100);
-        firstNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("firstName"));
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         firstNameCol.setCellFactory(TextFieldTableCell.<Person>forTableColumn());
-        firstNameCol.setOnEditCommit(
-            (TableColumn.CellEditEvent<Person, String> t) -> {
-            ((Person) t.getTableView().getItems().get(
-            t.getTablePosition().getRow())
-            ).setFirstName(t.getNewValue());
-            });
+        firstNameCol.setOnEditCommit((TableColumn.CellEditEvent<Person, String> t) -> 
+        {((Person) t.getTableView().getItems().get(t.getTablePosition().getRow())).setFirstName(t.getNewValue());});
         
-        TableColumn<Person, String> lastNameCol =
-            new TableColumn<>("Abizena");
+        TableColumn<Person, String> lastNameCol = new TableColumn<>("Abizena");
         lastNameCol.setMinWidth(100);
-        lastNameCol.setCellValueFactory(
-            new PropertyValueFactory<>("lastName"));
+        lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         lastNameCol.setCellFactory(TextFieldTableCell.<Person>forTableColumn());
         lastNameCol.setOnEditCommit(
             (TableColumn.CellEditEvent<Person, String> t) -> {
@@ -88,29 +80,46 @@ public class MainWindow extends Application {
                 t.getTablePosition().getRow())
                 ).setEmail(t.getNewValue());
             });
+        
+        TableColumn<Person, String> postuaCol =new TableColumn<>("Postua");
+        postuaCol.setMinWidth(100);
+        postuaCol.setCellValueFactory(new PropertyValueFactory<>("postua"));
+        postuaCol.setCellFactory(TextFieldTableCell.<Person>forTableColumn());
+        postuaCol.setOnEditCommit((TableColumn.CellEditEvent<Person, String> t) -> 
+        {((Person) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPostua(t.getNewValue());});
+        
         table.setItems(data);
-        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol,postuaCol);
+        
         final TextField addFirstName = new TextField();
         addFirstName.setPromptText("izen");
         addFirstName.setMaxWidth(firstNameCol.getPrefWidth());
+        
         final TextField addLastName = new TextField();
         addLastName.setMaxWidth(lastNameCol.getPrefWidth());
         addLastName.setPromptText("abizen");
+        
         final TextField addEmail = new TextField();
         addEmail.setMaxWidth(emailCol.getPrefWidth());
         addEmail.setPromptText("email");
+        
+        final TextField addPostua = new TextField();
+        addPostua.setMaxWidth(postuaCol.getPrefWidth());
+        addPostua.setPromptText("postua");
        
         final Button addButton = new Button("Gehitu");        
         addButton.setOnAction((ActionEvent e) -> {
             Person p = new Person(
                 addFirstName.getText(),
                 addLastName.getText(),
-                addEmail.getText());
+                addEmail.getText(),
+                addPostua.getText());
             data.add(p);
             
             addFirstName.clear();
             addLastName.clear();
             addEmail.clear();
+            addPostua.clear();
         });
         
         final Button removeButton = new Button("Ezabatu");        
@@ -119,7 +128,7 @@ public class MainWindow extends Application {
             data.remove(person);
         });
         
-        hb.getChildren().addAll(addFirstName, addLastName, addEmail, addButton, removeButton);
+        hb.getChildren().addAll(addFirstName, addLastName, addEmail,addPostua, addButton, removeButton);
         hb.setSpacing(3);
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
